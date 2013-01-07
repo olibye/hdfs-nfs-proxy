@@ -236,7 +236,7 @@ public class SessionSecurityHandlerGSS extends SessionSecurityHandler<VerifierGS
       }
       return buffer;
     } catch(GSSException ex) {
-      throw new RPCAcceptedException(RPC_ACCEPT_GARBAGE_ARGS);
+      throw new RPCAcceptedException(RPC_ACCEPT_GARBAGE_ARGS, ex);
     }
   }
   @Override
@@ -258,7 +258,7 @@ public class SessionSecurityHandlerGSS extends SessionSecurityHandler<VerifierGS
       return mContext.wrap(data, 0, data.length, new MessageProp(true));
     } catch(GSSException ex) {
       // TODO according to the RFC this should result in no response to the client
-      throw new RPCAcceptedException(RPC_ACCEPT_SYSTEM_ERR);
+      throw new RPCAcceptedException(RPC_ACCEPT_SYSTEM_ERR, ex);
     }
   }
 }
